@@ -31,9 +31,18 @@ var beweegAlles = function () {
   // kogel
 
   // speler
-  if ( KeyIsDown(37) ) { 
+  if ( keyIsDown(37) ) { 
     spelerX = spelerX - 5;
   } 
+  if ( keyIsDown(38) ) {
+    spelerY = spelerY - 5;
+  }
+  if ( keyIsDown(39) ) {
+    spelerX = spelerX + 5;
+  }
+  if ( keyIsDown(40) ) {
+    spelerY = spelerY + 5;
+  }
 };
 
 /**
@@ -53,7 +62,8 @@ var verwerkBotsing = function () {
  */
 var tekenAlles = function () {
   // achtergrond
-
+  fill("red");
+  rect(0, 0, 1280, 720);
   // vijand
 
   // kogel
