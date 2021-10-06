@@ -43,6 +43,20 @@ var beweegAlles = function () {
   if ( keyIsDown(40) ) {
     spelerY = spelerY + 5;
   }
+
+  // houdt speler binnen het veld
+  if (spelerX < 0) {
+    spelerX = 0;
+  }
+  if (spelerX > 1280) {
+    spelerX = 1280;
+  }
+  if (spelerY < 0) {
+    spelerY = 0;
+  }
+  if (spelerY > 720) {
+    spelerY = 720;
+  }
 };
 
 /**
