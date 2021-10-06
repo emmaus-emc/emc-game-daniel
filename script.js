@@ -25,12 +25,15 @@ var spelerY = 600; // y-positie van speler
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
 var beweegAlles = function () {
+  console.log("beweeg");
   // vijand
 
   // kogel
 
   // speler
-
+  if ( KeyIsDown(37) ) { 
+    spelerX = spelerX - 5;
+  } 
 };
 
 /**
@@ -56,12 +59,12 @@ var tekenAlles = function () {
   // kogel
 
   // speler
-  fill("white");
-  rect(spelerX - 25, spelerY - 25, 50, 50);
   fill("black");
+  ellipse(spelerX, spelerY, 50, 50);
+  fill("white");
   ellipse(spelerX, spelerY, 10, 10);
-
   // punten en health
+  console.log("teken");
 
 };
 
@@ -87,7 +90,7 @@ function setup() {
   createCanvas(1280, 720);
 
   // Kleur de achtergrond blauw, zodat je het kunt zien
-  background('blue');
+  background('white');
 }
 
 /**
@@ -96,6 +99,7 @@ function setup() {
  * uitgevoerd door de p5 library, nadat de setup functie klaar is
  */
 function draw() {
+  console.log("draw");
   if (spelStatus === SPELEN) {
     beweegAlles();
     verwerkBotsing();
