@@ -16,8 +16,8 @@ var spelStatus = SPELEN;
 
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
-var vijandX = 900;
-var vijandY = 600;
+var vijandX = 1230;
+var vijandY = 0;
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -28,20 +28,23 @@ var vijandY = 600;
  */
 var beweegAlles = function () {
   // vijand
-
+  vijandY = vijandY + 2;
+  if(vijandY > 720) {
+    vijandY = 0;
+  }
   // kogel
 
   // speler
-  if ( keyIsDown(37) ) { 
+  if (keyIsDown(37)) {
     spelerX = spelerX - 5;
-  } 
-  if ( keyIsDown(38) ) {
+  }
+  if (keyIsDown(38)) {
     spelerY = spelerY - 5;
   }
-  if ( keyIsDown(39) ) {
+  if (keyIsDown(39)) {
     spelerX = spelerX + 5;
   }
-  if ( keyIsDown(40) ) {
+  if (keyIsDown(40)) {
     spelerY = spelerY + 5;
   }
 
