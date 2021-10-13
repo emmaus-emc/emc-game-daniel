@@ -16,6 +16,8 @@ var spelStatus = SPELEN;
 
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
+var vijandX = 900;
+var vijandY = 600;
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -25,7 +27,6 @@ var spelerY = 600; // y-positie van speler
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
 var beweegAlles = function () {
-  console.log("beweeg");
   // vijand
 
   // kogel
@@ -79,7 +80,10 @@ var tekenAlles = function () {
   fill("red");
   rect(0, 0, 1280, 720);
   // vijand
-
+  fill("yellow")
+  ellipse(vijandX, vijandY, 50, 50);
+  fill("white")
+  ellipse(vijandX, vijandY, 10, 10);
   // kogel
 
   // speler
@@ -88,7 +92,6 @@ var tekenAlles = function () {
   fill("white");
   ellipse(spelerX, spelerY, 10, 10);
   // punten en health
-  console.log("teken");
 
 };
 
@@ -123,7 +126,6 @@ function setup() {
  * uitgevoerd door de p5 library, nadat de setup functie klaar is
  */
 function draw() {
-  console.log("draw");
   if (spelStatus === SPELEN) {
     beweegAlles();
     verwerkBotsing();
