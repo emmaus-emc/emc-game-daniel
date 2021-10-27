@@ -28,7 +28,7 @@ var vijandY = 0;
  */
 var beweegAlles = function () {
   // vijand
-  vijandY = vijandY + 2;
+  vijandY = vijandY + 5;
   if(vijandY > 720) {
     vijandY = 0;
   }
@@ -70,7 +70,14 @@ var beweegAlles = function () {
  */
 var verwerkBotsing = function () {
   // botsing speler tegen vijand
-
+if(
+  (vijandX-spelerX)<50 && 
+  (vijandX-spelerX)>-50 && 
+  (vijandY-spelerY)>-50 && 
+  (vijandY-spelerY)<50
+  ) {
+  console.log("botsing");
+};
   // botsing kogel tegen vijand
 
 };
