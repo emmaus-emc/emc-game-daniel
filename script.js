@@ -16,8 +16,9 @@ var spelStatus = SPELEN;
 
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
-var vijandX = 1230;
+var vijandX = 600;
 var vijandY = 0;
+var HP = 10; // is de leven van de dingetje
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -50,10 +51,10 @@ var beweegAlles = function () {
 
   // houdt speler binnen het veld
   if (spelerX < 0) {
-    spelerX = 0;
+    spelerX = 1280;
   }
   if (spelerX > 1280) {
-    spelerX = 1280;
+    spelerX = 0;
   }
   if (spelerY < 0) {
     spelerY = 0;
@@ -66,9 +67,11 @@ var beweegAlles = function () {
 /**
  * Checkt botsingen
  * Verwijdert neergeschoten vijanden
- * Updatet globale variabelen punten en health
+ * Updatet globale variabelen punten en health *
+
  */
-var verwerkBotsing = function () {
+ // hp eraf als botst
+ var verwerkBotsing = function () {
   // botsing speler tegen vijand
 if(
   (vijandX-spelerX)<50 && 
@@ -77,6 +80,7 @@ if(
   (vijandY-spelerY)<50
   ) {
   console.log("botsing");
+  HP=HP-0.05;
 };
   // botsing kogel tegen vijand
 
@@ -102,7 +106,8 @@ var tekenAlles = function () {
   fill("white");
   ellipse(spelerX, spelerY, 10, 10);
   // punten en health
-
+  textSize(32);
+  text('HP: '+HP,10,30);
 };
 
 /**
