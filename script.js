@@ -13,7 +13,7 @@
 const SPELEN = 1;
 const GAMEOVER = 2;
 var spelStatus = SPELEN;
-
+var Punten = 0;
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 var vijandX = 600;
@@ -67,9 +67,9 @@ var beweegAlles = function () {
 /**
  * Checkt botsingen
  * Verwijdert neergeschoten vijanden
- * Updatet globale variabelen punten en health *
+ * Updatet globale variabelen punten en health */
 
- */
+
  // hp eraf als botst
  var verwerkBotsing = function () {
   // botsing speler tegen vijand
@@ -80,7 +80,7 @@ if(
   (vijandY-spelerY)<50
   ) {
   console.log("botsing");
-  HP=HP-0.05;
+  HP=HP-0.02;
 };
   // botsing kogel tegen vijand
 
@@ -107,16 +107,12 @@ var tekenAlles = function () {
   ellipse(spelerX, spelerY, 10, 10);
   // punten en health
   textSize(32);
-  text('HP: '+HP,10,30);
+  text('HP: '+ceil(HP),10,30);
+  textSize(32);
+  text('Punten: '+floor(Punten), 1075, 40);
+  Punten = Punten + 0.02;
 };
 
-/**
- * return true als het gameover is
- * anders return false
- */
-var checkGameOver = function () {
-  return false;
-};
 
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
@@ -145,12 +141,25 @@ function draw() {
     beweegAlles();
     verwerkBotsing();
     tekenAlles();
-    if (checkGameOver()) {
+    if (HP < 0) {
       spelStatus = GAMEOVER;
     }
   }
+  
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
+    fill(0,0,255);
+    noStroke();
+    rect(30,40,1200,660,20);
 
+    textSize(64);
+    fill(255,0,0);
+    text("Game Over",480, 120);
+    text('Punten: '+floor(Punten), 510, 430);
+    
+    textSize(32);
+    fill(255,0,0);
+    text("Reload de pagina als je opnieuw wilt spelen", 320, 660);
+    }
   }
-}
+
