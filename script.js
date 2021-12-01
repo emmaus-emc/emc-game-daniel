@@ -16,8 +16,9 @@ var spelStatus = SPELEN;
 var Punten = 0;
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
-var vijandX = 600;
+var vijandX = 300;
 var vijandY = 0;
+var vijandLijstX = [400, 50, 550, 600, 700, 800, 1000, 300];
 var HP = 10; // is de leven van de dingetje
 
 /* ********************************************* */
@@ -33,6 +34,7 @@ var beweegAlles = function () {
   if(vijandY > 720) {
     vijandY = 0;
   }
+
   // kogel
 
   // speler
@@ -73,18 +75,21 @@ var beweegAlles = function () {
  // hp eraf als botst
  var verwerkBotsing = function () {
   // botsing speler tegen vijand
+  for (var i=0; i<8; i++) 
+  {
 if(
-  (vijandX-spelerX)<50 && 
-  (vijandX-spelerX)>-50 && 
+  (vijandLijstX[i]-spelerX)<50 && 
+  (vijandLijstX[i]-spelerX)>-50 && 
   (vijandY-spelerY)>-50 && 
-  (vijandY-spelerY)<50
+  (vijandY-spelerY)<50 
   ) {
   console.log("botsing");
-  HP=HP-0.02;
+  HP=HP-0.05;
+  };
 };
-  // botsing kogel tegen vijand
+ };
 
-};
+ // botsing kogel tegen vijand
 
 /**
  * Tekent spelscherm
@@ -94,10 +99,14 @@ var tekenAlles = function () {
   fill("red");
   rect(0, 0, 1280, 720);
   // vijand
+  for (var i=0; i<8; i++) 
+  {
   fill("yellow")
-  ellipse(vijandX, vijandY, 50, 50);
+  ellipse(vijandLijstX[i], vijandY, 50, 50);
   fill("white")
-  ellipse(vijandX, vijandY, 10, 10);
+  ellipse(vijandLijstX[i], vijandY, 10, 10);
+  };
+
   // kogel
 
   // speler
@@ -162,4 +171,4 @@ function draw() {
     text("Reload de pagina als je opnieuw wilt spelen", 320, 660);
     }
   }
-
+ 
