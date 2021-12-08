@@ -20,6 +20,8 @@ var vijandX = 300;
 var vijandY = 0;
 var vijandLijstX = [400, 50, 550, 600, 700, 800, 1000, 300];
 var HP = 10; // is de leven van de dingetje
+var kogelX = 200
+var kogelY = 200
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -36,7 +38,12 @@ var beweegAlles = function () {
   }
 
   // kogel
+  if (keyIsDown(32)) {
+    kogelX = spelerX;
+    kogelY = spelerY;
+  }
 
+  kogelY = kogelY - 10;
   // speler
   if (keyIsDown(37)) {
     spelerX = spelerX - 5;
@@ -90,7 +97,20 @@ if(
  };
 
  // botsing kogel tegen vijand
-
+  var verwerkBotsingKogel = function () {
+    for (var i=0; i<8; i++)
+    {
+    if(
+      (kogelX - vijandLijstX[i]) < 50 &&
+      (kogelX - vijandLijstX[i]) > -50 &&
+      (kogelY - vijandY) < 50 &&
+      (kogelY - vijandY) > -50
+    )
+    {
+      console.log("Kogel raak");
+    };
+  };
+  };
 /**
  * Tekent spelscherm
  */
@@ -108,7 +128,8 @@ var tekenAlles = function () {
   };
 
   // kogel
-
+  fill("white");
+  ellipse(kogelX, kogelY, 10, 10);
   // speler
   fill("black");
   ellipse(spelerX, spelerY, 50, 50);
@@ -149,6 +170,7 @@ function draw() {
   if (spelStatus === SPELEN) {
     beweegAlles();
     verwerkBotsing();
+    verwerkBotsingKogel();
     tekenAlles();
     if (HP < 0) {
       spelStatus = GAMEOVER;
