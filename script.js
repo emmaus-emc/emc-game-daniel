@@ -17,11 +17,12 @@ var Punten = 0;
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 var vijandX = 300;
-var vijandY = 0;
 var vijandLijstX = [400, 50, 550, 600, 700, 800, 1000, 300];
+var vijandLijstY = [0, 20, 30, 40, 50, 60, 10, 15];
 var HP = 10; // is de leven van de dingetje
 var kogelX = 200
 var kogelY = 200
+
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -32,17 +33,19 @@ var kogelY = 200
  */
 var beweegAlles = function () {
   // vijand
-  vijandY = vijandY + 5;
-  if(vijandY > 720) {
-    vijandY = 0;
-  }
-
+  for(var i=0; i<8; i++){
+  vijandLijstY[i] = vijandLijstY[i] + 5;
+  if(vijandLijstY[i] > 720) {
+    vijandLijstY[i] = 0;
+  };
+  };
   // kogel
+  for(var i=0; i<10; i++){
   if (keyIsDown(32)) {
     kogelX = spelerX;
     kogelY = spelerY;
   }
-
+  }
   kogelY = kogelY - 10;
   // speler
   if (keyIsDown(37)) {
@@ -78,6 +81,8 @@ var beweegAlles = function () {
  * Verwijdert neergeschoten vijanden
  * Updatet globale variabelen punten en health */
 
+//vijand verwijderen als geschoten//
+
 
  // hp eraf als botst
  var verwerkBotsing = function () {
@@ -87,8 +92,8 @@ var beweegAlles = function () {
 if(
   (vijandLijstX[i]-spelerX)<50 && 
   (vijandLijstX[i]-spelerX)>-50 && 
-  (vijandY-spelerY)>-50 && 
-  (vijandY-spelerY)<50 
+  (vijandLijstY[i]-spelerY)>-50 && 
+  (vijandLijstY[i]-spelerY)<50 
   ) {
   console.log("botsing");
   HP=HP-0.05;
@@ -103,11 +108,13 @@ if(
     if(
       (kogelX - vijandLijstX[i]) < 50 &&
       (kogelX - vijandLijstX[i]) > -50 &&
-      (kogelY - vijandY) < 50 &&
-      (kogelY - vijandY) > -50
+      (kogelY - vijandLijstY[i]) < 50 &&
+      (kogelY - vijandLijstY[i]) > -50
     )
     {
       console.log("Kogel raak");
+      vijandLijstY[i] = -100;
+      kogelX = 2000;
     };
   };
   };
@@ -122,9 +129,9 @@ var tekenAlles = function () {
   for (var i=0; i<8; i++) 
   {
   fill("yellow")
-  ellipse(vijandLijstX[i], vijandY, 50, 50);
+  ellipse(vijandLijstX[i], vijandLijstY[i], 50, 50);
   fill("white")
-  ellipse(vijandLijstX[i], vijandY, 10, 10);
+  ellipse(vijandLijstX[i], vijandLijstY[i], 10, 10);
   };
 
   // kogel
